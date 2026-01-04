@@ -68,16 +68,16 @@
                                 </td>
                                 <td class="pe-4 text-end">
                                     <div class="btn-group shadow-sm" role="group">
-                                        <a asp-page="./Details" asp-route-id="@item.RestaurantId" class="btn btn-sm btn-outline-secondary" title="Detalii">
-                                            <i class="bi bi-eye"></i>
+                                        <a asp-page="./Details" asp-route-id="@item.RestaurantId" class="btn btn-sm btn-outline-primary" title="Editează">
+                                            Details
                                         </a>
                                         @if (User.IsInRole("Admin"))
                                         {
                                             <a asp-page="./Edit" asp-route-id="@item.RestaurantId" class="btn btn-sm btn-outline-primary" title="Editează">
-                                                <i class="bi bi-pencil"></i>
+                                                Edit
                                             </a>
-                                            <a asp-page="./Delete" asp-route-id="@item.RestaurantId" class="btn btn-sm btn-outline-danger" title="Șterge">
-                                                <i class="bi bi-trash"></i>
+                                            <a asp-page="./Delete" asp-route-id="@item.RestaurantId" class="btn btn-sm btn-outline-primary" title="Editează">
+                                                Delete
                                             </a>
                                         }
                                     </div>

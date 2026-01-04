@@ -61,17 +61,17 @@
                                 </td>
                                 <td class="text-end pe-4">
                                     <div class="btn-group shadow-sm" role="group">
-                                        <a asp-page="./Details" asp-route-id="@item.MenuItemId" class="btn btn-sm btn-outline-secondary">
-                                            Detalii
+                                        <a asp-page="./Details" asp-route-id="@item.MenuItemId" class="btn btn-sm btn-outline-primary" title="Editează">
+                                            Details
                                         </a>
 
                                         @if (User.IsInRole("Admin"))
                                         {
-                                            <a asp-page="./Edit" asp-route-id="@item.MenuItemId" class="btn btn-sm btn-outline-primary">
+                                            <a asp-page="./Edit" asp-route-id="@item.MenuItemId" class="btn btn-sm btn-outline-primary" title="Editează">
                                                 Edit
                                             </a>
-                                            <a asp-page="./Delete" asp-route-id="@item.MenuItemId" class="btn btn-sm btn-outline-danger">
-                                                Șterge
+                                            <a asp-page="./Delete" asp-route-id="@item.MenuItemId" class="btn btn-sm btn-outline-primary" title="Editează">
+                                                Delete
                                             </a>
                                         }
                                     </div>
@@ -108,6 +108,6 @@
     }
 
     .btn-group .btn {
-        padding: 0.25rem 0.75rem;
+        margin-left: 2px;
     }
 </style>

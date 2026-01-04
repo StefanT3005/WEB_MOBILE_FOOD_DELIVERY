@@ -47,6 +47,8 @@ namespace WEB.Pages.Orders
         {
             if (!ModelState.IsValid)
             {
+                ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "Email");
+                ViewData["RestaurantId"] = new SelectList(_context.Restaurants, "RestaurantId", "AddressLine");
                 return Page();
             }
 
@@ -59,13 +61,8 @@ namespace WEB.Pages.Orders
             catch (DbUpdateConcurrencyException)
             {
                 if (!OrderExists(Order.OrderId))
-                {
                     return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return RedirectToPage("./Index");

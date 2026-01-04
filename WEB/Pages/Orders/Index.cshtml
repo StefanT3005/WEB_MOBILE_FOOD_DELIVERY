@@ -26,6 +26,7 @@
                             <th class="py-3">@Html.DisplayNameFor(model => model.Order[0].PlacedAt)</th>
                             <th class="py-3">@Html.DisplayNameFor(model => model.Order[0].DeliveryAddress)</th>
                             <th class="py-3 text-center">@Html.DisplayNameFor(model => model.Order[0].TotalAmount)</th>
+                            <th class="py-3 text-center">@Html.DisplayNameFor(model => model.Order[0].Status)</th>
                             <th class="pe-4 py-3 text-end">Options</th>
                         </tr>
                     </thead>
@@ -61,17 +62,25 @@
                                 <td class="text-center">
                                     <span class="fw-bold text-dark fs-5">@item.TotalAmount.ToString("N2") <small>RON</small></span>
                                 </td>
+                                <td class="text-center">
+                                    <span class="badge rounded-pill
+                                             @(item.Status == "InPregatire" ? "bg-warning text-dark" :
+                                               item.Status == "InLivrare" ? "bg-info text-dark" :
+                                               "bg-success")">
+                                    @item.Status
+                                </span>
+                            </td>
                                 <td class="pe-4 text-end">
                                     <div class="d-flex justify-content-end gap-1">
-                                        <a asp-page="./Details" asp-route-id="@item.OrderId" class="btn btn-outline-secondary btn-sm px-3 rounded-pill">
-                                            Details
-                                        </a>
-                                        <a asp-page="./Edit" asp-route-id="@item.OrderId" class="btn btn-light btn-sm rounded-circle border">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <a asp-page="./Delete" asp-route-id="@item.OrderId" class="btn btn-light btn-sm rounded-circle border text-danger">
-                                            <i class="bi bi-trash"></i>
-                                        </a>
+                                    <a asp-page="./Details" asp-route-id="@item.OrderId" class="btn btn-sm btn-outline-primary" title="Editează">
+                                        Details
+                                    </a>
+                                    <a asp-page="./Edit" asp-route-id="@item.OrderId" class="btn btn-sm btn-outline-primary" title="Editează">
+                                        Edit
+                                    </a>
+                                    <a asp-page="./Delete" asp-route-id="@item.OrderId" class="btn btn-sm btn-outline-primary" title="Editează">
+                                        Delete
+                                    </a>
                                     </div>
                                 </td>
                             </tr>

@@ -20,6 +20,7 @@ builder.Services.AddDbContext<FoodDeliveryIdentityContext>(options =>
         sql => sql.EnableRetryOnFailure()
     ));
 
+builder.Services.AddControllers();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
@@ -36,24 +37,7 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("AdminOrUser", policy => policy.RequireRole("Admin", "User"));
 });
 
-builder.Services.AddRazorPages(options =>
-{
-    // Admin only
-    options.Conventions.AuthorizeFolder("/Customers", "AdminOnly");
-    options.Conventions.AuthorizeFolder("/Payments", "AdminOnly");
-    options.Conventions.AuthorizeFolder("/Restaurants", "AdminOnly");
-    options.Conventions.AuthorizeFolder("/MenuItems", "AdminOnly");
 
-    // Admin + User
-    options.Conventions.AuthorizeFolder("/Orders", "AdminOrUser");
-    options.Conventions.AuthorizeFolder("/Reviews", "AdminOrUser");
-
-    // Optional: citire publica
-    options.Conventions.AllowAnonymousToPage("/Restaurants/Index");
-    options.Conventions.AllowAnonymousToPage("/Restaurants/Details");
-    options.Conventions.AllowAnonymousToPage("/MenuItems/Index");
-    options.Conventions.AllowAnonymousToPage("/MenuItems/Details");
-});
 
 builder.Services.AddRazorPages(options =>
 {
@@ -92,11 +76,16 @@ builder.Services.AddRazorPages(options =>
 
 var app = builder.Build();
 
+
+
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
     app.UseHsts();
 }
+
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -106,6 +95,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapControllers();
 app.MapRazorPages();
 
 // Migrate + Seed roluri + useri (Admin + User)

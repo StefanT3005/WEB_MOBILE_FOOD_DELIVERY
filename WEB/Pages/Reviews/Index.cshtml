@@ -72,21 +72,21 @@
                                         @if (User.IsInRole("Admin"))
                                         {
                                             <div class="btn-group shadow-sm">
-                                                <a asp-page="./Edit" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-primary" title="Edit">
-                                                    <i class="bi bi-pencil"></i>
+                                                <a asp-page="./Edit" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-primary" title="Editează">
+                                                    Details
                                                 </a>
-                                                <a asp-page="./Details" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-info" title="Details">
-                                                    <i class="bi bi-info-circle"></i>
+                                                <a asp-page="./Details" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-primary" title="Editează">
+                                                    Edit
                                                 </a>
-                                                <a asp-page="./Delete" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-danger" title="Delete">
-                                                    <i class="bi bi-trash"></i>
+                                                <a asp-page="./Delete" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-primary" title="Editează">
+                                                    Delete
                                                 </a>
                                             </div>
                                         }
                                         else
                                         {
-                                            <a asp-page="./Details" asp-route-id="@item.ReviewId" class="btn btn-sm btn-link text-decoration-none text-muted">
-                                                Vezi detalii
+                                            <a asp-page="./Details" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-primary" title="Editează">
+                                                Details
                                             </a>
                                         }
                                     </td>

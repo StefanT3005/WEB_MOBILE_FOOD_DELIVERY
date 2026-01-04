@@ -61,17 +61,17 @@
                                 <td class="text-center fw-bold text-primary">
                                     @((item.Quantity * item.UnitPrice).ToString("C2"))
                                 </td>
-                                <td class="pe-4 text-end">
-                                    <div class="dropdown">
-                                        <button class="btn btn-light btn-sm rounded-circle" type="button" data-bs-toggle="dropdown">
-                                            <i class="bi bi-three-dots-vertical"></i>
-                                        </button>
-                                        <ul class="dropdown-menu shadow border-0">
-                                            <li><a class="dropdown-item" asp-page="./Edit" asp-route-id="@item.OrderItemId text-primary"><i class="bi bi-pencil me-2"></i> Edit</a></li>
-                                            <li><a class="dropdown-item" asp-page="./Details" asp-route-id="@item.OrderItemId"><i class="bi bi-eye me-2"></i> Details</a></li>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item text-danger" asp-page="./Delete" asp-route-id="@item.OrderItemId"><i class="bi bi-trash me-2"></i> Delete</a></li>
-                                        </ul>
+                                <td class="text-end pe-4">
+                                    <div class="btn-group" role="group">
+                                        <a asp-page="./Edit" asp-route-id="@item.OrderItemId" class="btn btn-sm btn-outline-primary" title="Editează">
+                                            Edit
+                                        </a>
+                                        <a asp-page="./Details" asp-route-id="@item.OrderItemId" class="btn btn-sm btn-outline-info" title="Detalii">
+                                            Details
+                                        </a>
+                                        <a asp-page="./Delete" asp-route-id="@item.OrderItemId" class="btn btn-sm btn-outline-danger" title="Șterge">
+                                            Delete
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
@@ -108,5 +108,9 @@
     .badge {
         font-weight: 500;
         padding: 0.5em 0.8em;
+    }
+
+    .btn-group .btn {
+        margin-left: 2px;
     }
 </style>

@@ -26,6 +26,8 @@ namespace FoodDelivery.Web.Models
 
         public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
+        [Required, StringLength(30)]
+        public string Status { get; set; } = "In Pregatire";
         public Payment? Payment { get; set; }
         public Review? Review { get; set; }
     }
