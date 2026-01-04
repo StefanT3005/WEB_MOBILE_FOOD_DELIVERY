@@ -1,0 +1,130 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container-fluid p-0">
+    <div class="bg-dark text-white py-5 mb-4 shadow" style="background: linear-gradient(135deg, #1a1a1a 0%, #0d6efd 100%); border-radius: 0 0 30px 30px;">
+        <div class="container py-3">
+            <h1 class="display-5 fw-bold">Salut, @(User.Identity?.Name?.Split('@')[0] ?? "Oaspete")!</h1>
+            <p class="lead opacity-75">
+                @(User.IsInRole("Admin") ? "Panou de Control Administrare Food Delivery" : "Comandă mâncarea preferată de la cele mai bune restaurante.")
+            </p>
+        </div>
+    </div>
+
+    <div class="container">
+        @if (User.IsInRole("Admin"))
+        {
+            <h3 class="fw-bold mb-4 text-secondary text-uppercase small letter-spacing"><i class="bi bi-speedometer2 me-2"></i>Performanță Sistem</h3>
+
+            <div class="row g-4 mb-5">
+                <div class="col-md-3">
+                    <div class="card border-0 shadow-sm bg-primary text-white p-3 h-100 position-relative overflow-hidden">
+                        <small class="text-uppercase opacity-75 fw-bold">Venit Total (Live)</small>
+                        <h2 class="fw-bold mt-2">@Model.TotalRevenue.ToString("N2") <small class="fs-6">RON</small></h2>
+                        <i class="bi bi-graph-up-arrow position-absolute end-0 bottom-0 m-2 fs-1 opacity-25"></i>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card border-0 shadow-sm bg-dark text-white p-3 h-100 position-relative overflow-hidden">
+                        <small class="text-uppercase opacity-75 fw-bold">Comenzi Procesate</small>
+                        <h2 class="fw-bold mt-2">@Model.TotalOrders</h2>
+                        <i class="bi bi-cart-check position-absolute end-0 bottom-0 m-2 fs-1 opacity-25"></i>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card border-0 shadow-sm bg-info text-white p-3 h-100 position-relative overflow-hidden">
+                        <small class="text-uppercase opacity-75 fw-bold">Restaurante Partenere</small>
+                        <h2 class="fw-bold mt-2">@Model.TotalRestaurants</h2>
+                        <i class="bi bi-shop position-absolute end-0 bottom-0 m-2 fs-1 opacity-25"></i>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card border-0 shadow-sm bg-warning text-dark p-3 h-100 position-relative overflow-hidden">
+                        <small class="text-uppercase opacity-75 fw-bold">Rating Clienți</small>
+                        <h2 class="fw-bold mt-2">@Model.AverageRating.ToString("F1") / 5.0</h2>
+                        <i class="bi bi-star-fill position-absolute end-0 bottom-0 m-2 fs-1 opacity-25"></i>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="fw-bold mb-3 text-secondary">Scurtături Administrare</h3>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <a asp-page="/Restaurants/Index" class="btn btn-white border w-100 py-3 shadow-sm rounded-3 text-start hover-blue">
+                        <i class="bi bi-building me-2 text-primary"></i> Gestionare Locații
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a asp-page="/MenuItems/Index" class="btn btn-white border w-100 py-3 shadow-sm rounded-3 text-start hover-blue">
+                        <i class="bi bi-egg-fried me-2 text-primary"></i> Gestionare Meniuri
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a asp-page="/Payments/Index" class="btn btn-white border w-100 py-3 shadow-sm rounded-3 text-start hover-blue">
+                        <i class="bi bi-cash-coin me-2 text-primary"></i> Monitorizare Plăți
+                    </a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-md-8">
+                    <h3 class="fw-bold mb-4">Explorează Restaurantele</h3>
+                    <div class="card border-0 shadow-sm p-4 mb-4 bg-white position-relative overflow-hidden">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h5>Salut! Ești gata să comanzi?</h5>
+                                <p class="text-muted">Avem <strong>@Model.TotalRestaurants</strong> restaurante gata să îți prepare mâncarea preferată.</p>
+                                <a asp-page="/Restaurants/Index" class="btn btn-primary rounded-pill px-4 shadow">Comandă Acum</a>
+                            </div>
+                            <div class="col-md-4 text-center d-none d-md-block">
+                                <i class="bi bi-bag-heart text-primary opacity-25" style="font-size: 5rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f4f7f6;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .letter-spacing {
+        letter-spacing: 1px;
+    }
+
+    .btn-white {
+        background-color: #fff;
+        transition: all 0.2s;
+    }
+
+    .hover-blue:hover {
+        background-color: #e7f1ff;
+        border-color: #0d6efd !important;
+        transform: translateX(5px);
+    }
+
+    .card {
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        }
+
+    .list-group-item:hover {
+        background-color: #f8f9fa;
+        color: #0d6efd;
+    }
+</style>

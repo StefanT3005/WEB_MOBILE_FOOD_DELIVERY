@@ -1,0 +1,121 @@
+﻿@page
+@model WEB.Pages.Reviews.IndexModel
+
+@{
+    ViewData["Title"] = "Recenzii Clienți";
+}
+
+<div class="container-fluid pt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="display-6 fw-bold text-dark mb-1">Feedback Clienți</h1>
+            <p class="text-muted"><i class="bi bi-star-half me-1"></i> Gestionează experiențele împărtășite de utilizatori.</p>
+        </div>
+        <a asp-page="Create" class="btn btn-warning shadow-sm rounded-pill px-4 fw-bold">
+            <i class="bi bi-pencil-square me-2"></i> Scrie un Review
+        </a>
+    </div>
+
+    @if (Model.Review == null || !Model.Review.Any())
+    {
+        <div class="card border-0 shadow-sm p-5 text-center">
+            <div class="display-1 text-light mb-3"><i class="bi bi-chat-left-dots"></i></div>
+            <h4 class="text-muted">Nu există recenzii încă.</h4>
+            <p class="text-secondary">Fii primul care adaugă o impresie despre serviciile noastre!</p>
+        </div>
+    }
+    else
+    {
+        <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="bg-light border-bottom text-uppercase small">
+                            <tr>
+                                <th class="ps-4 py-3 text-muted" style="width: 180px;">@Html.DisplayNameFor(model => model.Review[0].Rating)</th>
+                                <th class="py-3 text-muted">@Html.DisplayNameFor(model => model.Review[0].Comment)</th>
+                                <th class="py-3 text-muted text-center">@Html.DisplayNameFor(model => model.Review[0].CreatedAt)</th>
+                                <th class="pe-4 py-3 text-end text-muted">Acțiuni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Review)
+                            {
+                                <tr>
+                                    <td class="ps-4">
+                                        <div class="text-warning">
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                if (i <= item.Rating)
+                                                {
+                                                    <i class="bi bi-star-fill"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="bi bi-star text-light text-secondary-50"></i>
+                                                }
+                                            }
+                                            <span class="ms-2 text-dark small fw-bold">(@item.Rating)</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="text-dark py-2 fst-italic shadow-none" style="max-width: 500px; line-height: 1.4;">
+                                            "@Html.DisplayFor(modelItem => item.Comment)"
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge bg-light text-dark border fw-normal">
+                                            <i class="bi bi-clock me-1 text-muted"></i> @item.CreatedAt.ToString("dd.MM.yyyy")
+                                        </span>
+                                    </td>
+                                    <td class="pe-4 text-end">
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <div class="btn-group shadow-sm">
+                                                <a asp-page="./Edit" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-primary" title="Edit">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                                <a asp-page="./Details" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-info" title="Details">
+                                                    <i class="bi bi-info-circle"></i>
+                                                </a>
+                                                <a asp-page="./Delete" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-danger" title="Delete">
+                                                    <i class="bi bi-trash"></i>
+                                                </a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <a asp-page="./Details" asp-route-id="@item.ReviewId" class="btn btn-sm btn-link text-decoration-none text-muted">
+                                                Vezi detalii
+                                            </a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    body {
+        background-color: #fcfcfd;
+    }
+    /* Stil pentru steluțele goale */
+    .text-light {
+        color: #dee2e6 !important;
+    }
+
+    .table td {
+        padding-top: 1.2rem;
+        padding-bottom: 1.2rem;
+    }
+    /* Design pentru citat */
+    .fst-italic {
+        color: #4a4a4a;
+        font-size: 0.95rem;
+    }
+</style>
