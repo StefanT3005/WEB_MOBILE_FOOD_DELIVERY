@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MOBILE.Views.MenuItemsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Meniu">
+
+    <VerticalStackLayout Padding="16" Spacing="12">
+
+        <Label Text="{Binding RestaurantName}" TextColor="White" FontAttributes="Bold" FontSize="20" />
+
+        <CollectionView ItemsSource="{Binding Items}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="12" Margin="0,6" CornerRadius="12">
+                        <HorizontalStackLayout Spacing="12" VerticalOptions="Center">
+                            <VerticalStackLayout HorizontalOptions="FillAndExpand">
+                                <Label Text="{Binding Name}" TextColor="White" FontAttributes="Bold" FontSize="16" />
+                                <Label Text="{Binding Price, StringFormat='Pret: {0} RON'}" TextColor="White" Opacity="0.7" />
+                            </VerticalStackLayout>
+
+                            <Button
+                                Text="Alege"
+                                BackgroundColor="#B39DDB"
+                                TextColor="White"
+
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.PickItemCommand}"
+                                CommandParameter="{Binding}" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>

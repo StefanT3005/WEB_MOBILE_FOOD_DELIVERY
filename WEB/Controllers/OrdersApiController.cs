@@ -82,7 +82,11 @@ namespace FoodDelivery.Web.Controllers
             if (order == null)
                 return NotFound();
 
-            return Ok(order.Status);
+            return Ok(new
+            {
+                orderId = order.OrderId,
+                status = order.Status
+            });
         }
     }
 }

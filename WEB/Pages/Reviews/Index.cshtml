@@ -72,12 +72,14 @@
                                         @if (User.IsInRole("Admin"))
                                         {
                                             <div class="btn-group shadow-sm">
-                                                <a asp-page="./Edit" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-primary" title="Editează">
+                                                <a asp-page="./Details" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-primary" title="Editează">
                                                     Details
                                                 </a>
-                                                <a asp-page="./Details" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-primary" title="Editează">
+                                                
+                                                <a asp-page="./Edit" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-primary" title="Editează">
                                                     Edit
                                                 </a>
+                                                
                                                 <a asp-page="./Delete" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-primary" title="Editează">
                                                     Delete
                                                 </a>

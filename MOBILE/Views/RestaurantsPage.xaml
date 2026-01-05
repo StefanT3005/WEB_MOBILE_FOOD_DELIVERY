@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MOBILE.Views.RestaurantsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Restaurante">
+
+    <VerticalStackLayout Padding="16" Spacing="12">
+
+        <Button Text="Refresh" 
+                BackgroundColor="#B39DDB"
+                TextColor="White"
+                Command="{Binding RefreshCommand}" />
+
+        <CollectionView ItemsSource="{Binding Restaurants}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="12" Margin="0,6" CornerRadius="12">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding name}"  TextColor="White" FontAttributes="Bold" FontSize="18" />
+                            <Label Text="{Binding addressLine}"  TextColor="White" FontSize="13" Opacity="0.7" />
+
+                            <Button
+                                Text="Vezi meniul"
+                                BackgroundColor="#B39DDB"
+                                TextColor="White"
+
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenMenuCommand}"
+                                CommandParameter="{Binding}"
+                                Margin="0,10,0,0" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>
